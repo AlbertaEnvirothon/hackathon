@@ -10,6 +10,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'company_name',
+            'position',
             'created_at',
             'status'
         ]
