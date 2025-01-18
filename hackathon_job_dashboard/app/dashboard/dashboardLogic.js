@@ -8,6 +8,7 @@ export default function DashboardLogic() {
   useEffect(() => {
     const fetchData = async () => {
       const jobs = await get_jobs();
+      console.log("Jobs:", jobs);
       setData(jobs);
     };
     fetchData();
