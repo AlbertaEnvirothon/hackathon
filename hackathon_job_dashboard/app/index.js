@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { SafeAreaView, Text, Button, StyleSheet, View } from "react-native";
 import PopupDialog from "./add_edit_job/PopupDialogLogic";
 import DashboardLogic from "./dashboard/dashboardLogic";
+import { get_jobs } from "../src/database";
 
 // Main APP entry point.
 export default function Main() {
@@ -14,7 +15,7 @@ export default function Main() {
   };
 
   const handleEditExisting = () => {
-    setDialogId("12345"); // change this later on
+    setDialogId("acd592f3-88a8-4938-9643-30932d8d3628"); // change this later on
     setModalVisible(true);
   };
 

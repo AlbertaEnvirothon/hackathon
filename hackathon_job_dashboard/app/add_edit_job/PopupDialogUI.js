@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Modal,
   View,
@@ -17,6 +17,16 @@ export default function PopupDialogUI({
   formData,
 }) {
   const [status, setStatus] = useState(formData.status);
+  const [companyName, setCompanyName] = useState(formData.company_name);
+  const [jobTitle, setJobTitle] = useState(formData.position);
+  const [date, setDate] = useState(formData.date);
+
+  useEffect(() => {
+    setStatus(formData.status);
+    setCompanyName(formData.company_name);
+    setJobTitle(formData.position);
+    setDate(formData.date);
+  }, [formData]);
 
   return (
     <Modal
@@ -34,8 +44,11 @@ export default function PopupDialogUI({
               style={styles.input}
               placeholder="Company Name"
               placeholderTextColor="#aaa"
-              value={formData.companyName}
-              onChangeText={(text) => onChange("company_name", text)}
+              value={companyName}
+              onChangeText={(text) => {
+                setCompanyName(text);
+                onChange("company_name", text);
+              }}
             />
           </View>
           <View style={styles.row}>
@@ -44,8 +57,11 @@ export default function PopupDialogUI({
               style={styles.input}
               placeholder="Job Title"
               placeholderTextColor="#aaa"
-              value={formData.jobTitle}
-              onChangeText={(text) => onChange("position", text)}
+              value={jobTitle}
+              onChangeText={(text) => {
+                setJobTitle(text);
+                onChange("position", text);
+              }}
             />
           </View>
           <View style={styles.row}>
@@ -54,8 +70,11 @@ export default function PopupDialogUI({
               style={styles.input}
               placeholder="YYYY-MM-DD"
               placeholderTextColor="#aaa"
-              value={formData.date}
-              onChangeText={(text) => onChange("date", text)}
+              value={date}
+              onChangeText={(text) => {
+                setDate(text);
+                onChange("date", text);
+              }}
             />
           </View>
           <View style={styles.row}>
@@ -74,15 +93,7 @@ export default function PopupDialogUI({
               <Picker.Item label="Interview" value="INTERVIEW" />
             </Picker>
           </View>
-          <TextInput
-            style={styles.description}
-            placeholder="Description"
-            placeholderTextColor="#aaa"
-            multiline={true}
-            numberOfLines={4}
-            value={formData.description}
-            onChangeText={(text) => onChange("description", text)}
-          />
+
           <View style={styles.buttonContainer}>
             <Button title="Cancel" onPress={onClose} />
             <Button title="Confirm" onPress={onConfirm} />
