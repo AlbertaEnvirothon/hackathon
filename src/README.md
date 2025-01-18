@@ -1,7 +1,12 @@
 # Setting up a Virtual Environment 
-- **NOTE: there are a few ways to set up a virtual environment. This is just one of them.**
 - We are running our application on Django 5.1.5, which requires Python3.11.
+**NOTE: there are a few ways to set up a virtual environment. This is just one of them.**
 
+Here are some other resources to help set up a virtual environment if the follow instructions do not work
+- [Real Python](https://realpython.com/python-virtual-environments-a-primer/)
+- [Python Docs](https://docs.python.org/3/library/venv.html)
+
+#### The following commands shoudl work for MacOS and Linux. 
 - First, check that you have venv/env installed on your local machine by pulling up venv's help menu. Enter this into your terminal:
 
     ```
@@ -30,7 +35,7 @@
 - If you want other ways to check, here is a [Stackoverflow link](https://stackoverflow.com/a/1883251)
 
 **NOTE: Do not push your virtual environment files to GitHub!!**
-- If Git is trying to do this, add the name of your virtual environment directory/file to the '.gitignore' file if it is not already there. 
+- If Git is trying to do this, add the name of your virtual environment directory/file to the '.gitignore' file. 
 
 
 # Installing Dependencies
@@ -42,7 +47,7 @@
     ```
 - a bunch of text will appear in your terminal. This is just showing the progress of your installations
 
-### (Optional) create a superuser to to use the admin page for manual data entry:
+## (Optional) create a superuser to to use the admin page for manual data entry:
 - Creating a superuser is useful to check and edit the database for your Django site
 
     ```
@@ -52,6 +57,8 @@
 - Follow the instructions that appear in your terminal. 
 --> Django will need you to provide a username, password, and email address to create a superuser
 --> Honestly, IDK if you need to enter a valid email address
+
+- To access the admin site, put the development server's url in your browser (more info below), and then add "/admin" to the end of it
 
 ### Set up the Database
 - The following commands will set up the database as configured in models.py (I think)
@@ -77,7 +84,22 @@
     ```
 
 - By default, the application runs at port ```8000```.
-- To open to the application in your browser
+- Set-up info will print in your terminal. 
+--> To open the Django project in your web browser, look for the line: 
+```
+Starting development server at http://....
+```
+and copy and paste the URL/http link into your chosen browser. You can use your Django site in your web browser as long as you do not quite the server 
+
+- As you use your Django application, status information will print in your terminal -- including error codes
+
+# Quitting the Server
+- To stop running your web server/Django application, follow the command from the set-up line that starts with:
+```
+Quit the server with...
+```
+- Most likely, the command is CTRL+C
+
 
 # API Documentation
 
