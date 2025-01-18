@@ -1,6 +1,6 @@
 export const sendDataToDatabase = async (data) => {
   try {
-    const response = await fetch("/proxy/api/application/", {
+    const response = await fetch("http://localhost:8000/application/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
