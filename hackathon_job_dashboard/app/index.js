@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { SafeAreaView, Text, Button, StyleSheet, View } from "react-native";
 import PopupDialog from "./add_edit_job/PopupDialogLogic";
-import dashboard from "./dashboard/dashboardLogic";
+import DashboardLogic from "./dashboard/dashboardLogic";
 
 // Main APP entry point.
 export default function Main() {
   const [modalVisible, setModalVisible] = useState(false);
-  const [method_1, method] = useState(false);
   const [dialogId, setDialogId] = useState(null);
-
-  const [dashVisible, setDashVisible] = useState(true);
 
   const handleCreateNew = () => {
     setDialogId(null);
@@ -23,13 +20,7 @@ export default function Main() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <dashboard
-          visible={dashVisible}
-          
-        
-        /> 
-      </View>
+      <DashboardLogic />
       <Text style={styles.text}>Root Layout</Text>
       <View style={styles.buttonContainer}>
         <Button title="Create New Job Entry" onPress={handleCreateNew} />

@@ -1,51 +1,31 @@
-import React, { useState } from "react";
-import {
-  Modal,
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  TextInput,
-  Picker,
-} from "react-native";
+import React from "react";
+import { FlatList, View, Text, StyleSheet } from "react-native";
 
-
-export default function dashboardUI({
-    visible, 
-    onChange,
-    data,
-}) {
-    const [item, showDate] = useState(data)
-
-    return (
-        <FlatList
-          data={item}
-          keyExtractor={item => item.id}
-          renderItem={({ item }) => (
-            <View style={styles.item}>
-              <Text>{item.entry}</Text>
-            </View>
-          )}
-        />
-      );
+export default function DashboardUI({ data }) {
+  return (
+    <FlatList
+      data={data}
+      keyExtractor={(item) => item.id.toString()}
+      renderItem={({ item }) => (
+        <View style={styles.item}>
+          <Text style={styles.text}>{item.company_name}</Text>
+          <Text style={styles.text}>{item.position}</Text>
+          <Text style={styles.text}>{item.status}</Text>
+        </View>
+      )}
+    />
+  );
 }
-  
-  const styles = StyleSheet.create({
-    item: {
-      flexDirection: 'row',
-      padding: 20,
-      marginBottom: 10,
-      backgroundColor: '#f8f8f8',
-      borderRadius: 5,
-    },
-    avatar: {
-      width: 40,
-      height: 40,
-      borderRadius: 20,
-      marginRight: 16,
-    },
-    text: {
-      fontSize: 18,
-    },
-  });
-  
+
+const styles = StyleSheet.create({
+  item: {
+    flexDirection: "column",
+    padding: 20,
+    marginBottom: 10,
+    backgroundColor: "#ffffff",
+    borderRadius: 5,
+  },
+  text: {
+    fontSize: 18,
+  },
+});

@@ -1,32 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { sendDataToDatabase } from "../../src/database";
-import dashboardUI from "./dashboardUI";
+import DashboardUI from "./dashboardUI";
+import { get_jobs } from "../../src/database";
 
-export default function dashboardLogic({ visible, onClose, id }) {
-  const [isVisible, setIsVisible] = useState(visible);
-  const [formData, setFormData] = useState({
-    entry: "_DummyEntry",
-    id: "unique"
-  });
-
-  setFormData([{entry: "dummy", id: "unique"}])
+export default function DashboardLogic() {
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    setIsVisible(visible);
-  }, [visible]);
+    const fetchData = async () => {
+      const jobs = await get_jobs();
+      setData(jobs);
+    };
+    fetchData();
+  }, []);
 
-  const handleClose = () => {
-    setIsVisible(false);
-    if (onClose) {
-      onClose();
-    }
-  };
-
-  return (
-    <dashboardUI
-      //visible={isVisible}
-      onChange={handleChange}
-      data={formData}
-    />
-  );
+  return <DashboardUI data={data} />;
 }
