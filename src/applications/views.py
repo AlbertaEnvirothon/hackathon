@@ -71,6 +71,8 @@ def add_application(request, *args, **kwargs):
 
     request_body = request.data
 
+    print(request_body)
+
     if request.content_type != "application/json":
         return Response(
             data = {
