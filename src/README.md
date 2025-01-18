@@ -13,6 +13,12 @@
     .\venv\Scripts\activate # Windows
     ```
 
+- Install the dependencies:
+
+    ```
+    pip install -r requirements.txt
+    ```
+
 - (Optional) create a superuser to to use the admin page for manual data entry:
 
     ```
