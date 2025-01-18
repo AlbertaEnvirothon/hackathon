@@ -1,0 +1,144 @@
+openapi: 3.0.0
+info:
+  title: Application API
+  description: API to manage applications, including creating, retrieving, and updating application data.
+  version: "1.0.0"
+paths:
+  /application/:
+    post:
+      summary: Create a new application
+      operationId: createApplication
+      tags:
+        - Application
+      requestBody:
+        description: Application object that needs to be added.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                company_name:
+                  type: string
+                  description: The name of the company applying for the position.
+                  example: "Company XYZ"
+                position:
+                  type: string
+                  description: The position the application is for.
+                  example: "Software Engineer"
+                status:
+                  type: string
+                  description: The status of the application.
+                  enum:
+                    - APPLIED
+                    - INTERVIEW
+                    - OFFER
+                    - REJECTION
+                  example: "APPLIED"
+              required:
+                - company_name
+                - position
+                - status
+      responses:
+        "200":
+          description: Application successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        "400":
+          description: Invalid application detail(s).
+        "415":
+          description: Unsupported media type (only `application/json` is accepted).
+
+  /application/{application_id}/:
+    put:
+      summary: Edit an existing application
+      operationId: editApplication
+      tags:
+        - Application
+      parameters:
+        - name: application_id
+          in: path
+          required: true
+          description: The ID of the application to update.
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: Application data to update.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                company_name:
+                  type: string
+                  description: The updated company name.
+                position:
+                  type: string
+                  description: The updated position.
+                status:
+                  type: string
+                  description: The updated status of the application.
+                  enum:
+                    - APPLIED
+                    - INTERVIEW
+                    - OFFER
+                    - REJECTION
+      responses:
+        "200":
+          description: Application successfully updated.
+        "400":
+          description: Invalid application detail(s) or missing fields.
+        "404":
+          description: Application not found.
+        "415":
+          description: Unsupported media type (only `application/json` is accepted).
+
+  /applications/:
+    get:
+      summary: Retrieve all applications
+      operationId: getApplications
+      tags:
+        - Application
+      responses:
+        "200":
+          description: A list of applications.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Application'
+
+components:
+  schemas:
+    Application:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The ID of the application.
+        company_name:
+          type: string
+          description: The name of the company applying for the position.
+        position:
+          type: string
+          description: The position the application is for.
+        status:
+          type: string
+          enum:
+            - APPLIED
+            - INTERVIEW
+            - OFFER
+            - REJECTION
+          description: The current status of the application.
+        created_at:
+          type: string
+          format: date
+          description: The date when the application was created.
+      required:
+        - company_name
+        - position
+        - status
