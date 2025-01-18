@@ -35,7 +35,7 @@ export default function PopupDialogUI({
               placeholder="Company Name"
               placeholderTextColor="#aaa"
               value={formData.companyName}
-              onChangeText={(text) => onChange("companyName", text)}
+              onChangeText={(text) => onChange("company_name", text)}
             />
           </View>
           <View style={styles.row}>
@@ -45,7 +45,7 @@ export default function PopupDialogUI({
               placeholder="Job Title"
               placeholderTextColor="#aaa"
               value={formData.jobTitle}
-              onChangeText={(text) => onChange("jobTitle", text)}
+              onChangeText={(text) => onChange("position", text)}
             />
           </View>
           <View style={styles.row}>
@@ -68,10 +68,10 @@ export default function PopupDialogUI({
                 onChange("status", itemValue);
               }}
             >
-              <Picker.Item label="Offer" value="offer" />
-              <Picker.Item label="Rejected" value="rejected" />
-              <Picker.Item label="Applied" value="applied" />
-              <Picker.Item label="Interview" value="interview" />
+              <Picker.Item label="Offer" value="OFFER" />
+              <Picker.Item label="Rejected" value="REJECTION" />
+              <Picker.Item label="Applied" value="APPLIED" />
+              <Picker.Item label="Interview" value="INTERVIEW" />
             </Picker>
           </View>
           <TextInput

@@ -5,10 +5,10 @@ import { sendDataToDatabase } from "../../src/database";
 export default function PopupDialogLogic({ visible, onClose, id }) {
   const [isVisible, setIsVisible] = useState(visible);
   const [formData, setFormData] = useState({
-    companyName: "",
-    jobTitle: "",
+    company_name: "",
+    position: "",
     date: "",
-    status: "offer",
+    status: "OFFER",
     description: "",
   });
 
