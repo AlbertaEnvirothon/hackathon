@@ -48,7 +48,7 @@ export const get_jobs = async () => {
       throw new Error("Network response was not ok");
     }
     const responseData = await response.json();
-
+    return responseData;
     console.log("Data successfully sent to the database:", responseData);
   } catch (error) {
     console.error("Error sending data to the database:", error);
