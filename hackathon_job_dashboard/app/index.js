@@ -20,10 +20,6 @@ export default function Main() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <view>
-        <Text style={styles.text}>lists </Text>
-      </view>
-
       <View style={styles.buttonContainer}>
         <Button title="Create New Job Entry" onPress={handleCreateNew} />
         <Button title="Edit Existing Job Entry" onPress={handleEditExisting} />

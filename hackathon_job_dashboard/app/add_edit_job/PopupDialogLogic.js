@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PopupDialogUI from "./PopupDialogUI";
-import { sendDataToDatabase } from "../../src/database";
+import { get_job_from_id, create_job_data, edit_job } from "../../src/database";
 
 export default function PopupDialogLogic({ visible, onClose, id }) {
   const [isVisible, setIsVisible] = useState(visible);
@@ -8,9 +8,25 @@ export default function PopupDialogLogic({ visible, onClose, id }) {
     company_name: "",
     position: "",
     date: "",
-    status: "OFFER",
-    description: "",
+    status: "APPLIED",
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (id) {
+        const data = await get_job_from_id(id);
+        if (data) {
+          setFormData({
+            company_name: data.company_name || "",
+            position: data.position || "",
+            date: data.date || "",
+            status: data.status || "APPLIED",
+          });
+        }
+      }
+    };
+    fetchData();
+  }, [id]);
 
   useEffect(() => {
     setIsVisible(visible);
@@ -24,7 +40,11 @@ export default function PopupDialogLogic({ visible, onClose, id }) {
   };
 
   const handleConfirm = () => {
-    sendDataToDatabase(formData); // Send the form data to the database
+    if (id) {
+      edit_job(id, formData); // Send the form data to the database
+    } else {
+      create_job_data(formData); // Send the form data to the database
+    }
     handleClose();
   };
 
