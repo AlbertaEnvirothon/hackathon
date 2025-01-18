@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PopupDialogUI from "./PopupDialogUI";
-import { sendDataToDatabase } from "../../src/database"; // Import the function to send data to the database
+import { sendDataToDatabase } from "../../src/database";
 
 export default function PopupDialogLogic({ visible, onClose, id }) {
   const [isVisible, setIsVisible] = useState(visible);

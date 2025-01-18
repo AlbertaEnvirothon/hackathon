@@ -13,7 +13,7 @@ export default function Main() {
   };
 
   const handleEditExisting = () => {
-    setDialogId("12345"); // Replace with the actual ID of the job entry to edit
+    setDialogId("12345"); // change this later on
     setModalVisible(true);
   };
 
