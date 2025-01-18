@@ -19,52 +19,74 @@ def get_applications(request, *args, **kwargs):
         status = 200
     )
 
-@api_view(['PUT'])
+@api_view(['GET', 'PUT'])
 def edit_application(request, *args, **kwargs):
 
-    request_body = request.data
+    if request.method == "PUT":
 
-    if request.content_type != "application/json":
+        request_body = request.data
+
+        if request.content_type != "application/json":
+            return Response(
+                data = {
+                    "Message": "Wrong content type"
+                },
+                status = 415
+            )
+
+        try:
+            existing_application = Application.objects.get(id=kwargs.get("application_id"))
+            for k, v in request_body.items():
+                if k == "company_name":
+                    existing_application.company_name = v
+                elif k == "position":
+                    existing_application.position = v
+                elif k == "status":
+                    if v not in dict(Application.Status.choices):
+                        raise Exception()
+                    existing_application.status = v
+            existing_application.save()
+
+        except Application.DoesNotExist:
+            return Response(
+                data = {
+                    "Message": "Application not found"
+                },
+                status = 404
+            )
+
+        except:
+            return Response(
+                data = {
+                    "Message": "Invalid application detail(s)"
+                },
+                status = 400
+            )
+
         return Response(
-            data = {
-                "Message": "Wrong content type"
-            },
-            status = 415
+            data = {},
+            status = 200
         )
 
-    try:
-        existing_application = Application.objects.get(id=kwargs.get("application_id"))
-        for k, v in request_body.items():
-            if k == "company_name":
-                existing_application.company_name = v
-            elif k == "position":
-                existing_application.position = v
-            elif k == "status":
-                if v not in dict(Application.Status.choices):
-                    raise Exception()
-                existing_application.status = v
-        existing_application.save()
+    elif request.method == "GET":
 
-    except Application.DoesNotExist:
+        try:
+            existing_application = Application.objects.get(id=kwargs.get("application_id"))
+
+        except Application.DoesNotExist:
+            return Response(
+                data = {
+                    "Message": "Application not found"
+                },
+                status = 404
+            )
+
+        serializier = ApplicationSerializer(existing_application)
+
         return Response(
-            data = {
-                "Message": "Application does not exist"
-            },
-            status = 400
+            data = serializier.data,
+            status = 200
         )
-
-    except:
-        return Response(
-            data = {
-                "Message": "Invalid application detail(s)"
-            },
-            status = 400
-        )
-
-    return Response(
-        data = {},
-        status = 200
-    )
 
 @api_view(['POST'])
 def add_application(request, *args, **kwargs):
