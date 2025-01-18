@@ -85,5 +85,11 @@ target/
 __pycache__/
 local_settings.py
 
+# Python virtual environment
 .env
+/env
+.venv 
+/venv
+
+# Django's SQL database
 db.sqlite3
